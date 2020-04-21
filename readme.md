@@ -1,7 +1,45 @@
+# MNIST/FashionMNIST/CIFAR10,循环神经网络(RNN/LSTM/GRU)
 递归神经网络(RNN)是神经网络的一种，被广泛用于自然语言处理与手写字体的识别中。本次的分析工作主要分为以下几部分：
 * 使用递归神经网络和其变体(长短期记忆网络LSTM、GRU)在多个数据集(MNIST/FashionMNIST/CIFAR10)上进行训练、测试，比较效果
 * 简单分析不同数据集给参数调整(递归神经网络层数、训练迭代次数)及过拟合现象带来的影响
 * 分析其他超参数(学习率/隐藏层节点数/Dropout)对训练结果带来的影响
+
+## 使用环境
+* Google Colab
+* Python 3.6.7
+* Pytorch 1.1.0
+* GCC 8.2.0
+
+## 参数
+* device:根据硬件条件决定是否使用GPU进行加速
+* sequence_length:时间序列
+* input_size:输入的维度
+* hidden_size:隐藏层节点数
+* num_layers:隐藏层数量
+* num_classes:分类种类
+* num_direction:是否适用双向循环神经网络，如果使用双向循环神经网络，将该值置为2，否则置为1
+* batch_size:每批使用的样本数量
+* num_epochs:训练的迭代次数
+* learning_rate:学习率
+* rnn_structure:选择RNN结构(RNN/LSTM/GRU)
+
+## 数据加载
+* train_loader:训练集
+* test_loader:测试集
+
+## 循环神经网络的构建
+本循环神经网络由一个4层的循环神经层和一个全连接层组成
+* rnn:循环神经网络层，共2层，各层节点数为128个
+* fc:全连接层，128->10
+
+## 定义函数
+* train:训练函数
+* test:测试函数
+* 实例化网络
+* 使用CrossEntropyLoss作为准则函数
+* 使用Adam优化器
+* 保存训练结果
+* 下载记录损失值变化的数组与训练结果
 
 ## 比较RNN/LSTM/GRU这三种递归神经网络的效果
 普通的RNN神经网络结构存在着梯度消失或者梯度爆炸的问题，对权值更新和学习效果带来不利的影响。为了解决梯度消失与梯度爆炸的问题，LSTM及其简化版本GRU被相继提出，并获得了不错的效果。<br>
